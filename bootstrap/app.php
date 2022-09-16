@@ -23,7 +23,10 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
- $app->withFacades();
+$app->withFacades();
+$app->withFacades(true, [
+   'Illuminate\Support\Facades\Notification' => 'Notification',
+   ]);
 
  $app->withEloquent();
  
@@ -95,8 +98,13 @@ $app->configure('app');
  $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
  ]);
+ $app->routeMiddleware([
+    'verified' => App\Http\Middleware\EnsureEmailIsVerified::class,
+    'auth.role' => App\Http\Middleware\RoleAuthorization::class,
+
+]);
  
- $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
+ 
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -112,7 +120,10 @@ $app->configure('app');
  $app->register(App\Providers\AuthServiceProvider::class);
  $app->register(Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
  $app->register(App\Providers\EventServiceProvider::class);
-
+ $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
+ $app->register(Illuminate\Mail\MailServiceProvider::class);
+ $app->register(Illuminate\Notifications\NotificationServiceProvider::class);
+ $app->register(Illuminate\Notifications\NotificationServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -123,18 +134,9 @@ $app->configure('app');
 | can respond to, as well as the controllers that may handle them.
 |
 */
-$app->register(Illuminate\Mail\MailServiceProvider::class);
-$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
-$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
-$app->routeMiddleware([
-    'auth' => App\Http\Middleware\Authenticate::class,
-    'verified' => App\Http\Middleware\EnsureEmailIsVerified::class,
-    'auth.role' => App\Http\Middleware\RoleAuthorization::class,
 
-]);
-$app->withFacades(true, [
-    'Illuminate\Support\Facades\Notification' => 'Notification',
-    ]);
+
+
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {

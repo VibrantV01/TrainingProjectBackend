@@ -43,9 +43,9 @@ class DailyMail extends Command
             
             $task_pending = Task::where([['asigned_to', '=', $user->id],['deleted_by','=',null ]]);
             Mail::raw("Please visit your dashboard", function ($mail) use ($user) {
-                $mail->from('digamber@positronx.com');
+                $mail->from('example@example.com');
                 $mail->to($user->email)
-                    ->subject('Daily New Quote!');
+                    ->subject('Daily New Task!');
             });
         
         }

@@ -11,8 +11,8 @@ use Illuminate\Foundation\Events\Dispatchable;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 
-//{/*implements ShouldBroadcast*/}
-class TaskAssigned extends Event implements ShouldBroadcast
+
+class TaskAssigned extends Event 
 {
     use  SerializesModels;
     public $user;
@@ -22,12 +22,6 @@ class TaskAssigned extends Event implements ShouldBroadcast
         $this->user=$user;
         $this->task = $task;
     }
-    public function broadcastOn()
-  {
-      return ['7e4f96f1381b51749e6a'];
-  }
-    // public function broadcastAs()
-    // {
-    //     return 'my-event';
-    // }
+
+    
 }

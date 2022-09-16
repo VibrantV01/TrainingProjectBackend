@@ -12,11 +12,21 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        // \App\Events\ExampleEvent::class => [
-        //     \App\Listeners\ExampleListener::class,
-        // ],
+        
         'App\Events\TaskAssigned' => [
             'App\Listeners\TaskAssignedListener',
            ],
+        'App\Events\TaskEditted' => [
+            'App\Listeners\TaskEditListener'
+        ],   
+        'App\Events\TaskUpdate' => [
+            'App\Listeners\TaskUpdateListener'
+        ],
+        'App\Events\UserEdit' => [
+            'App\Listeners\UserEditListener'
+        ],
+        'App\Events\NotificationEvent' => [
+            'App\Listeners\NotificationListener',
+        ],
     ];
 }

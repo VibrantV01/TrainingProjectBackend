@@ -22,6 +22,8 @@ class Tasks extends Migration
             $table->integer('assigned_by');
             $table->string('description');
             $table->string('deleted_by')->nullable(); // default
+            $table->string('assigned_by_name');
+            $table->string('asigned_to_name');
             $table->dateTime('due_date');
             $table->timestamps();
         });

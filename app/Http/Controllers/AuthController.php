@@ -47,10 +47,6 @@ class AuthController extends Controller
   */
   public function emailVerify(Request $request)
   {
-    // return response()->json(auth()->user());
-    //$this->validate($request, ['token' => 'required']);
-     \Tymon\JWTAuth\Facades\JWTAuth::getToken();
-     \Tymon\JWTAuth\Facades\JWTAuth::parseToken()->authenticate();
      
 if ( !$request->user() ) {
         return response()->json('Invalid token', 401);
@@ -79,10 +75,7 @@ return response()->json('Email address '. $request->user()->email.' successfully
      */
     public function login(Request $request)
     {
-        // $user = $request->user();
-        // if (!$user['email_verified_at']){
-        //     return response()->json('verify email first');
-        // }
+    
         
         $this->validate($request, [
             'email' => 'required|string',
@@ -95,11 +88,12 @@ return response()->json('Email address '. $request->user()->email.' successfully
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+
         return $this->respondWithToken($token);
         
     }
 
-    /**
+    /** 
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse

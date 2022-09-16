@@ -32,6 +32,8 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
         'status',
         'due_date',
         'deleted_by',
+        'asigned_to_name',
+        'assigned_by_name',
     ];
 /**
      * The attributes that should be hidden for arrays.

@@ -14,7 +14,7 @@
     <title>New Task Added</title>
 </head>
 <body>
-    <h6>Dear {{$user->name}}!<h6><br/><br/><br/>
+    <h6>Dear {{$user->name}},<h6><br/><br/><br/>
 <div>
     <p>New task is assigned to you, please visit you page and take necessary actions. </p>
     <p>Details of the task follow.</p>

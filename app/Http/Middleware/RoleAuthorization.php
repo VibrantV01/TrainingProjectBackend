@@ -6,14 +6,14 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 class RoleAuthorization{
-public function handle($request, Closure $next, ...$roles)
+public function handle($request, Closure $next, $roles = ['admin'])
 {
     try {
         //dd($request);
         //Access token from the request
         $token = JWTAuth::parseToken();
         //Try authenticating user
-        $user = $token->authenticate();
+        $user = $token->authenticate(); 
     } catch (TokenExpiredException $e) {
         //Thrown if token has expired
         return $this->unauthorized('Your token has expired. Please, login again.');
